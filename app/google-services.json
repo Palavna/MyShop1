@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "764140602519",
+    "project_id": "myshop-adbad",
+    "storage_bucket": "myshop-adbad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764140602519:android:df98876dd160bb248915d2",
+        "android_client_info": {
+          "package_name": "com.example.yana.myshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764140602519-nf8lmgctsdrn5ferb1j90j466kj9tci0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZwQl59fiY7T_F2Bxl1B4v48iv_3JQDKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764140602519-nf8lmgctsdrn5ferb1j90j466kj9tci0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
