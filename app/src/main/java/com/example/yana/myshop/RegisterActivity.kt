@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -16,12 +17,12 @@ import com.google.firebase.database.ValueEventListener
 
 class RegisterActivity : AppCompatActivity(), ValueEventListener {
 
-   private lateinit var phone: String
-    private lateinit var userName: String
-    private lateinit var password: String
+    private var phone: String? = null
+    private var userName: String? = null
+    private var password: String? = null
 
-    val database = FirebaseDatabase.getInstance()
-    val myRef = database.getReference("message")
+    private val database = FirebaseDatabase.getInstance()
+    private val myRef = database.getReference("message")
 
     private lateinit var registerBtn: Button
     private lateinit var userNameInput: EditText
@@ -43,9 +44,9 @@ class RegisterActivity : AppCompatActivity(), ValueEventListener {
 
     private fun setupListeners() {
         registerBtn.setOnClickListener {
-            val userName = userNameInput.text.toString()
-            val phone = phoneInput.text.toString()
-            val password = passwordInput.text.toString()
+            userName = userNameInput.text.toString()
+            phone = phoneInput.text.toString()
+            password = passwordInput.text.toString()
 
             if (TextUtils.isEmpty(userName)) {
                 Toast.makeText(this, "Введите имя", Toast.LENGTH_SHORT).show()
@@ -64,18 +65,18 @@ class RegisterActivity : AppCompatActivity(), ValueEventListener {
             }
         }
     }
-    fun validatePhone(userName: String, phone: String, password: String){
+    fun validatePhone(userName: String?, phone: String?, password: String?){
         myRef.addListenerForSingleValueEvent(this)
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
-        if (!(snapshot.child("").child(phone).exists())){
-           val userDataMap = HashMap<String, Any>()
+        if (!(snapshot.child("").child(phone.toString()).exists())){
+           val userDataMap = HashMap<String, Any?>()
             userDataMap.put("phone", phone)
             userDataMap.put("userName", userName)
             userDataMap.put("password", password)
 
-            myRef.child("User").child(phone).updateChildren(userDataMap)
+            myRef.child("User").child(phone.toString()).updateChildren(userDataMap)
                 .addOnCompleteListener{
                   if(it.isSuccessful){
                       loadingBar.dismiss()
@@ -97,7 +98,7 @@ class RegisterActivity : AppCompatActivity(), ValueEventListener {
     }
 
     override fun onCancelled(error: DatabaseError) {
-
+        Log.d("sadsadasdsa", "sdasdasdasdsadasd")
     }
 
 }
