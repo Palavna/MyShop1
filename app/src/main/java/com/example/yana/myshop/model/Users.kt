@@ -1,9 +1,12 @@
 package com.example.yana.myshop.model
 
-data class Users (
+data class Users(
 
-     var name: String? = null,
-     val phone: String,
-     val password: String,
+    var userName: String? = null,
+    var phone: String? = null,
+    var password: String? = null,
 
-    )
+    ) {
+    constructor() : this(null, null, null)
+}
+

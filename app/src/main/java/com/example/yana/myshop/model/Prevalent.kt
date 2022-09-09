@@ -2,5 +2,9 @@ package com.example.yana.myshop.model
 
 data class Prevalent (
 
-    private val onlineUser: String
+    var onlineUser: String? = null,
+
+    var userPhoneKey: String? = null,
+    var userPasswordKey: String? = null,
+
         )

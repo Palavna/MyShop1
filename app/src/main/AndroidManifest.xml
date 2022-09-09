@@ -14,16 +14,22 @@
         android:theme="@style/Theme.MyShop"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name="com.example.yana.myshop.ui.users.admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.example.yana.myshop.ui.users.admin.AdminAddNewProdActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.yana.myshop.ui.users.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.users.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.users.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.yana.myshop.ui.users.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

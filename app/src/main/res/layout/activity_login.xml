@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#89C2F3"
-    tools:context=".LoginActivity">
+    tools:context=".ui.users.LoginActivity">
 
     <ImageView
         android:id="@+id/appLogoLogin"
@@ -105,8 +105,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginButton"
-        android:layout_marginTop="14dp"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:text="Для админа"
         android:textAllCaps="false"
@@ -119,14 +119,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginButton"
-        android:layout_marginTop="14dp"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="14dp"
         android:text="Для клиентов"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:visibility="invisible"
         android:textSize="20sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold|italic"
+        android:visibility="gone" />
 
 </RelativeLayout>
