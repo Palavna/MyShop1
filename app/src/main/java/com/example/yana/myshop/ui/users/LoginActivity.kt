@@ -88,8 +88,7 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
 
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.child(parentDbName.toString()).child(phone.toString()).exists()) {
-            val usersData = snapshot.child(parentDbName.toString()).child(phone.toString())
-                .getValue(Users::class.java)
+            val usersData = snapshot.child(parentDbName.toString()).child(phone.toString()).getValue(Users::class.java)
             if (usersData?.phone.equals(phone)) {
                 if (usersData?.password.equals(password)) {
 
@@ -98,7 +97,7 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
-                    } else if (parentDbName.equals("Admin")) {
+                    } else if (parentDbName.equals("Admin")){
                         loadingBar.dismiss()
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, AdminCategoryActivity::class.java)

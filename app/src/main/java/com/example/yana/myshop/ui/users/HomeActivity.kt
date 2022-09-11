@@ -1,13 +1,9 @@
 package com.example.yana.myshop.ui.users
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import com.example.yana.myshop.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.yana.myshop.databinding.ActivityHomeBinding
-import com.example.yana.myshop.databinding.ActivityMainBinding
-import com.example.yana.myshop.databinding.ActivityRegisterBinding
 import io.paperdb.Paper
 
 class HomeActivity : AppCompatActivity() {
