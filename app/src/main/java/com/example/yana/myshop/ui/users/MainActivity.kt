@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity(), ValueEventListener {
     private val myRef = database.getReference("message")
     private var userPhoneKey: String? = null
     private var userPasswordKey: String? = null
-    private var phone: String? = null
-    private var password: String? = null
     private lateinit var loadingBar: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +47,8 @@ class MainActivity : AppCompatActivity(), ValueEventListener {
             startActivity(intent)
         }
 
-         userPhoneKey = Paper.book().read<String>(Prevalent::userPhoneKey.toString())
-         userPasswordKey = Paper.book().read<String>(Prevalent::userPasswordKey.toString())
+        userPhoneKey = Paper.book().read<String>(Prevalent::userPhoneKey.toString())
+        userPasswordKey = Paper.book().read<String>(Prevalent::userPasswordKey.toString())
 
         if (userPhoneKey != "" && userPasswordKey != "") {
             if (!TextUtils.isEmpty(userPhoneKey.toString()) &&
@@ -72,8 +70,8 @@ class MainActivity : AppCompatActivity(), ValueEventListener {
     }
 
     override fun onDataChange(snapshot: DataSnapshot) {
-        if (snapshot.child("User").child(phone.toString()).exists()) {
-            val usersData = snapshot.child("User").child(phone.toString())
+        if (snapshot.child("User").child(userPhoneKey.toString()).exists()) {
+            val usersData = snapshot.child("User").child(userPhoneKey.toString())
                 .getValue(Users::class.java)
             if (usersData?.phone.equals(userPhoneKey)) {
                 if (usersData?.password.equals(userPasswordKey)) {
@@ -87,8 +85,6 @@ class MainActivity : AppCompatActivity(), ValueEventListener {
             }
         } else {
             loadingBar.dismiss()
-            Toast.makeText(this, "Аккаунт с номером" + phone + "не существует", Toast.LENGTH_SHORT)
-                .show()
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             Log.d("sadsadasdsa", "sdasdasdasdsadasd")

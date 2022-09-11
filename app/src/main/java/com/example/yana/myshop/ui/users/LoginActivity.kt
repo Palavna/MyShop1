@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import com.example.yana.myshop.R
 import com.example.yana.myshop.databinding.ActivityLoginBinding
 import com.example.yana.myshop.databinding.ActivityMainBinding
@@ -40,7 +41,6 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         loadingBar = ProgressDialog(this)
         Paper.init(this)
         setupListeners()
@@ -64,15 +64,15 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
             }
         }
         binding.adminPanelLink.setOnClickListener {
-            binding.adminPanelLink.isInvisible
-            binding.notAdminPanelLink.visibility
-            binding.loginButton.setText("Вход для админа")
+            binding.adminPanelLink.isVisible = false
+            binding.notAdminPanelLink.isVisible = true
+            binding.loginButton.text = "Вход для админа"
             parentDbName = "Admin"
         }
         binding.notAdminPanelLink.setOnClickListener {
-            binding.adminPanelLink.visibility
-            binding.notAdminPanelLink.isInvisible
-            binding.loginButton.setText("Войти")
+            binding.adminPanelLink.isVisible = true
+            binding.notAdminPanelLink.isVisible = false
+            binding.loginButton.text = "Войти"
             parentDbName = "User"
         }
     }
@@ -92,12 +92,13 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
                 .getValue(Users::class.java)
             if (usersData?.phone.equals(phone)) {
                 if (usersData?.password.equals(password)) {
+
                     if (parentDbName.equals("User")) {
                         loadingBar.dismiss()
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
-                    }else if (parentDbName.equals("Admin")){
+                    } else if (parentDbName.equals("Admin")) {
                         loadingBar.dismiss()
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, AdminCategoryActivity::class.java)
@@ -105,13 +106,6 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
                     }
                 }
             }
-        } else {
-            loadingBar.dismiss()
-            Toast.makeText(this, "Аккаунт с номером", Toast.LENGTH_SHORT)
-                .show()
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            Log.d("sadsadasdsa", "sdasdasdasdsadasd")
         }
     }
 
