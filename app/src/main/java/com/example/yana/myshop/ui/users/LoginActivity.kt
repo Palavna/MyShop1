@@ -13,6 +13,7 @@ import com.example.yana.myshop.R
 import com.example.yana.myshop.databinding.ActivityLoginBinding
 import com.example.yana.myshop.databinding.ActivityMainBinding
 import com.example.yana.myshop.databinding.ActivityRegisterBinding
+import com.example.yana.myshop.model.Admins
 import com.example.yana.myshop.ui.users.admin.AdminAddNewProdActivity
 import com.example.yana.myshop.model.Prevalent
 import com.example.yana.myshop.model.Users
@@ -33,6 +34,7 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("message")
 
+    private var parentDbNameA: String? = "Admin"
     private var parentDbName: String? = "User"
     private lateinit var loadingBar: ProgressDialog
 
@@ -67,7 +69,7 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
             binding.adminPanelLink.isVisible = false
             binding.notAdminPanelLink.isVisible = true
             binding.loginButton.text = "Вход для админа"
-            parentDbName = "Admin"
+            parentDbNameA = "Admin"
         }
         binding.notAdminPanelLink.setOnClickListener {
             binding.adminPanelLink.isVisible = true
@@ -88,16 +90,15 @@ class LoginActivity : AppCompatActivity(), ValueEventListener {
 
     override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.child(parentDbName.toString()).child(phone.toString()).exists()) {
-            val usersData = snapshot.child(parentDbName.toString()).child(phone.toString()).getValue(Users::class.java)
-            if (usersData?.phone.equals(phone)) {
-                if (usersData?.password.equals(password)) {
-
+            val usersData = snapshot.child(parentDbName.toString()).child(phone.toString()).getValue(Admins::class.java)
+            if (usersData?.phone?.equals(phone) == true) {
+                if (usersData?.password?.equals(password) == true) {
                     if (parentDbName.equals("User")) {
                         loadingBar.dismiss()
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, HomeActivity::class.java)
                         startActivity(intent)
-                    } else if (parentDbName.equals("Admin")){
+                    } else if (parentDbNameA.equals("Admin")){
                         loadingBar.dismiss()
                         Toast.makeText(this, "Успешный вход", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, AdminCategoryActivity::class.java)
